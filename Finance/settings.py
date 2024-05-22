@@ -24,16 +24,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = "django-insecure-21@_v1et^&0!nli$br)uj@1g#fw+j5kxk6_in+&ttn_(0%=#nn"
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+SECRET_KEY = "django-insecure-21@_v1et^&0!nli$br)uj@1g#fw+j5kxk6_in+&ttn_(0%=#nn"
+# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = False
+# DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
-# ALLOWED_HOSTS = ["127.0.0.1"]
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = ["127.0.0.1",".vercel.app", "*"]
+# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
@@ -58,6 +58,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = "Finance.urls"
@@ -84,33 +85,33 @@ WSGI_APPLICATION = "Finance.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'finance',
-#         'USER': 'root',
-#         # 'PASSWORD': 'redminote619',
-#         'HOST':'127.0.0.1',
-#         'PORT':'3306',
+DATABASES = {
+    "default": {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'finance',
+        'USER': 'root',
+        # 'PASSWORD': 'redminote619',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
+    }
+}
+# if DEVELOPMENT_MODE is True:
+#     DATABASES = {
+#         "default": {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'finance',
+#             'USER': 'root',
+#             # 'PASSWORD': 'redminote619',
+#             'HOST':'127.0.0.1',
+#             'PORT':'3306',
+#         }
 #     }
-# }
-if DEVELOPMENT_MODE is True:
-    DATABASES = {
-        "default": {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'finance',
-            'USER': 'root',
-            # 'PASSWORD': 'redminote619',
-            'HOST':'127.0.0.1',
-            'PORT':'3306',
-        }
-    }
-elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-    }
+# elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+#     if os.getenv("DATABASE_URL", None) is None:
+#         raise Exception("DATABASE_URL environment variable not defined")
+#     DATABASES = {
+#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+#     }
 
 
 # Password validation
@@ -153,6 +154,14 @@ AUTHENTICATION_BACKENDS = [
     # Add other authentication backends here
 ]
 
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {  
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 # AUTH_USER_MODEL = 'Tracker.CustomUser'
 
 LOGIN_REDIRECT_URL = '/'

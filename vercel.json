@@ -1,0 +1,19 @@
+{
+    "builds": [
+      {
+        "src": "Finance/wsgi.py",
+        "use": "@vercel/python"
+      },
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "Tracker" }
+    }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "Finance/wsgi.py"
+      }
+    ]
+}
