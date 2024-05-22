@@ -32,7 +32,7 @@ DEBUG = False
 # DEBUG = os.getenv("DEBUG", "False") == "True"
 
 
-ALLOWED_HOSTS = ["127.0.0.1",".vercel.app", "*"]
+ALLOWED_HOSTS = ["127.0.0.1",".vercel.app"]
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
@@ -90,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'finance',
         'USER': 'root',
-        # 'PASSWORD': 'redminote619',
+        # 'PASSWORD': 'admin',
         'HOST':'127.0.0.1',
         'PORT':'3306',
     }

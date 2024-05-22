@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', sans-serif;
+}
+
+/* LANDING PAGES */
+.header{
+    display: flex;
+    justify-content: flex-end;
+}
+.container{
+    width: 60vw;
+    margin: 5vh auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5vh;
+}
+.loginForm,.signupForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
+}
+.form-input{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1vw;
+}
+.form-input > input{
+    background-color: rgba(134, 188, 255, 0.7);
+    border: none;
+    border-radius: 2px;
+    padding: 2px 4px;
+}
+.submit-btn{
+    width: 70%;
+    color: white;
+    background-color: rgb(25, 25, 139);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: larger;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+.submit-btn:hover{
+    background-color: rgba(134, 188, 255, 0.7);
+    color: rgb(25, 25, 139);
+    cursor: pointer;
+}
+
+/* HOME PAGE */
+.homeHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+    border-bottom: 2px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: rgba(134, 188, 255, 0.7);
+}
+.Fin{
+    height: 10vh;
+    margin-top: 5px;
+}
+.welcome-header{
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+    color: darkblue;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 2vh;
+    align-items:center;
+}
+.logout-btn{
+    width: fit-content;
+    color: white;
+    background-color: darkblue;
+    padding: 5px 10px;
+    margin-bottom: 1vh;
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 400;
+    transition: all 0.2s ease-in-out;
+}
+.logout-btn:hover{
+    background-color: rgba(134, 188, 255, 0.7);
+    color: darkblue;
+    cursor: pointer;
+}
+.homeContainer{
+    grid-template-columns: 1fr 2fr;
+    gap: 10px;
+    padding: 10px;
+}
+.aside{
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+}
+.bside{
+    width: 100%;
+    align-self: center;
+    justify-self: center;
+}
+.display_header{
+    color: darkblue;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.box{
+    height: 5vh;
+    width: 90%;
+    margin: 2vh auto 2vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+.links{
+    text-align: center;
+    font-size: large;
+}
+.add_transaction{
+    background-color: rgba(134, 188, 255, 0.7);
+    color: darkblue;
+    width: 40%;
+    margin-top: 5vh;
+    transition: all 0.2s ease-in-out;
+}
+.add_transaction:hover{
+    background-color: darkblue;
+    color: white;
+    cursor: pointer;
+}
