@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <img class="FinsightsLogo" src="{% static 'Finsights.png' %}" alt="Logo">
+    </div>
+    <div class="formContainer">
+        <form class="loginForm" action="/form/" method="post" autocomplete="off">
+            {% csrf_token %}
+            <div class="error-message" style="color: red;">
+                {% for error in errors%}
+                <p>{{error}}</p>
+                {% endfor %}
+            </div>
+            <div class="form-input">
+                <p style="font-weight: bold;">Transaction Type:</p>
+                <input type="radio" id="income" value="income" name="type" required>
+                <label for="income">Income</label><br>
+                <input type="radio" id="expense" value="expense" name="type">
+                <label for="expense">Expense</label>
+            </div>
+            <div class="form-input">
+                <label><b>Amount:</b></label>
+                <input type="number" placeholder="1000" id="amount" name="amount" required />
+            </div>
+            <div class="form-input">
+                <label for="category" style="font-weight: bold;">Category of Transaction:</label>
+                <select id="category" name="category">
+                    <option value="business">Business</option>
+                    <option value="non_business">Non-business</option>
+                    <option value="personal">Personal</option>
+                    <option value="others">Others</option>
+                </select>
+            </div>
+            <div class="form-input">
+                <label><b>Desciption:</b></label>
+                <input type="text" placeholder="Miscellaneous" id="description" name="description" required />
+            </div>
+            <div class="form-input">
+                <label><b>Date of Transaction:</b></label>
+                <input type="date" id="date" name="date" required />
+            </div>
+            <button class="submit-btn" type="submit" style="margin-top: 2vh;">Add Transaction</button>
+            <hr style="width:100%;text-align:left;margin-left:0">
+        </form>
+    </div>
+</div>
+
+{% endblock %}

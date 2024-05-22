@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+    {% block content %}
+    <div class="homeHeader">
+        <div class="left">
+            <img class="Fin logo" src="{% static 'Finsights.png' %}" alt="logo"/>
+        </div>
+        <div class="center">
+            <p class="welcome-header">Welcome {{ name }}!</p>
+        </div>
+        <div class="right">
+            <div class="logout-btn" onclick="logout()">Logout&nbsp;<i class="bi bi-box-arrow-right"></i></div>
+        </div>
+    </div>
+    <div class="homeContainer" style="display: flex; flex-direction: row;">
+        <div class="aside">
+            <h2 class="display_header">This Month</h2>
+            <div class="box view_income" style="background-color:darkgreen; color: white;">
+                <i class="bi bi-cash-stack"></i>
+                <p class="links">INCOME : {{credit}}</p>
+            </div>
+            <div class="box view_expense" style="background-color:orangered; color: white;">
+                <i class="bi bi-currency-rupee"></i>
+                <p class="links">EXPENSE : {{debit}} </p>
+            </div>
+            {% if profit == True %}
+            <div class="box view_income" style="background-color: rgb(21, 209, 21); color: white;">
+                <i class="bi bi-graph-up-arrow"></i>
+                <p class="links">PROFIT : {{overall}}</p>
+            </div>
+            {% endif %}
+            {% if loss == True %}
+            <div class="box view_income" style="background-color: rgb(229, 60, 60); color: white;">
+                <i class="bi bi-graph-down-arrow"></i>
+                <p class="links">LOSS : {{overall}}</p>
+            </div>
+            {% endif %}
+            <div class="box add_transaction" onclick="view_form()">
+                <i class="bi bi-receipt"></i>
+                <p class="links">ADD A TRANSACTION</p>
+            </div>
+        </div>
+        <div class="bside">
+            <h2 class="display_header">Your Recent Transactions</h2>
+            <table id="test" class="display">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#test').DataTable({
+                "ajax": "{% url 'api_records_list' %}",
+                "columns": [
+                    { "data": "type" },
+                    { "data": "amount" },
+                    { "data": "category" },
+                    { "data": "description" },
+                    { "data": "date" },
+                    {
+                        mRender: function (data, type, row) {
+                            return '<a href="/delete/' + row.id + '">DELETE</a>'
+                        }
+                    }
+                ]
+            });
+        });
+        function view_form(){
+            window.location.href = "/form";
+        }
+        function logout() {
+            window.location.href = "/logout";
+        }
+    </script>
+
+    {% endblock %}
